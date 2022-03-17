@@ -104,12 +104,12 @@
 
 
 
-初始化
+    初始化
 
-    初始化，为'类的静态变量'赋予'正确的初始值'，JVM负责对类进行初始化，主要'对类变量进行初始化'。在Java中对类变量进行初始值设定有两种方式：
-
-        ① '声明类变量时' '指定初始值'
-        ② '使用静态代码块' '为类变量指定初始值'
+        初始化，为'类的静态变量'赋予'正确的初始值'，JVM负责对类进行初始化，主要'对类变量进行初始化'。
+        在Java中对类变量进行初始值设定有两种方式：
+            ① '声明类变量时' '指定初始值'
+            ② '使用静态代码块' '为类变量指定初始值'
 
 JVM初始化步骤
 
@@ -227,114 +227,125 @@ JVM类加载机制
             Class.forName(name, initialize, loader)'带参函数也可控制是否加载static块'。并且'只有调用了newInstance()方法'或采用调用构造函数，'创建类的对象' 。
 
 5、双亲委派模型
-双亲委派模型的'工作流程'是：如果一个类加载器'收到了类加载的请求'，它首先不会自己去尝试加载这个类，而是'把请求委托给父加载器'去完成，依次向上，
-因此，'所有的类加载请求' 最终都应该'被传递到顶层的启动类加载器中'，只有当'父加载器' '在它的搜索范围中' '没有找到所需的类时'，即无法完成该加载，'子加载器' '才会尝试自己去加载该类'。
+    双亲委派模型的'工作流程'是：如果一个类加载器'收到了类加载的请求'，它首先不会自己去尝试加载这个类，而是'把请求委托给父加载器'去完成，依次向上，
+    因此，'所有的类加载请求' 最终都应该'被传递到顶层的启动类加载器中'，只有当'父加载器' '在它的搜索范围中' '没有找到所需的类时'，即无法完成该加载，'子加载器' '才会尝试自己去加载该类'。
 
-双亲委派机制:
+    双亲委派机制:
 
-1、当AppClassLoader加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器ExtClassLoader去完成。
-2、当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader```去完成。
-3、如果BootStrapClassLoader加载失败（例如在$JAVA_HOME/jre/lib里未查找到该class），会使用ExtClassLoader来尝试加载；
-4、若ExtClassLoader也加载失败，则会使用AppClassLoader来加载，如果AppClassLoader也加载失败，则会报出异常ClassNotFoundException。
-ClassLoader源码分析：
+        1、当'AppClassLoader加载一个class'时，它'首先不会自己去尝试加载'这个类，而是把'类加载请求委派给父类加载器'ExtClassLoader去完成。
+        2、'当ExtClassLoader加载一个class时'，它'首先也不会自己去尝试加载'这个类，而是'把类加载请求委派给BootStrapClassLoader'去完成。
+        3、如果BootStrapClassLoader加载失败（例如'在$JAVA_HOME/jre/lib里未查找到该class'），'会使用ExtClassLoader来尝试加载'；
+        4、'若ExtClassLoader也加载失败'，'则会使用AppClassLoader来加载'，'如果AppClassLoader也加载失败'，则'会报出异常ClassNotFoundException'。
 
-public Class<?> loadClass(String name)throws ClassNotFoundException {
-        return loadClass(name, false);
-}
+    ClassLoader源码分析：
 
-protected synchronized Class<?> loadClass(String name, boolean resolve)throws ClassNotFoundException {
-        // 首先判断该类型是否已经被加载
-        Class c = findLoadedClass(name);
-        if (c == null) {
-            //如果没有被加载，就委托给父类加载或者委派给启动类加载器加载
-            try {
-                if (parent != null) {
-                     //如果存在父类加载器，就委派给父类加载器加载
-                    c = parent.loadClass(name, false);
-                } else {
-                //如果不存在父类加载器，就检查是否是由启动类加载器加载的类，通过调用本地方法native Class findBootstrapClass(String name)
-                    c = findBootstrapClass0(name);
+    public Class<?> loadClass(String name)throws ClassNotFoundException {
+            return loadClass(name, false);
+    }
+
+    protected synchronized Class<?> loadClass(String name, boolean resolve)throws ClassNotFoundException {
+            首先'判断该类型' '是否已经被加载'
+            Class c = findLoadedClass(name);
+            if (c == null) {
+                '如果没有'被加载，就'委托给父类加载'或者'委派给启动类加载器'加载
+                try {
+                    if (parent != null) {
+                        如果'存在父类加载器'，就委派给父类加载器加载
+                        c = parent.loadClass(name, false);
+                    } else {
+                        如果'不存在父类加载器'，就'由启动类加载器加载类'，通过调用本地方法native Class findBootstrapClass(String name)
+                        c = findBootstrapClass0(name);
+                    }
+                } catch (ClassNotFoundException e) {
+                    如果'父类加载器'和'启动类加载器' '都不能成功加载该类'，才'调用自身的加载功能'
+                    c = findClass(name);
                 }
-            } catch (ClassNotFoundException e) {
-             // 如果父类加载器和启动类加载器都不能完成加载任务，才调用自身的加载功能
-                c = findClass(name);
             }
+            if (resolve) {
+                resolveClass(c);
+            }
+            return c;
         }
-        if (resolve) {
-            resolveClass(c);
-        }
-        return c;
-    }
-双亲委派模型意义：
+    '双亲委派'模型'意义'：
 
-系统类防止内存中出现多份同样的字节码
-保证Java程序安全稳定运行
+        a.系统类'防止内存中出现多份同样的字节码'
+        b.保证'Java程序' '安全稳定运行'
+
 6、自定义类加载器
-通常情况下，我们都是直接使用系统类加载器。但是，有的时候，我们也需要自定义类加载器。比如应用是通过网络来传输 Java类的字节码，为保证安全性，这些字节码经过了加密处理，这时系统类加载器就无法对其进行加载，这样则需要自定义类加载器来实现。自定义类加载器一般都是继承自ClassLoader类，从上面对loadClass方法来分析来看，我们只需要重写 findClass 方法即可。下面我们通过一个示例来演示自定义类加载器的流程：
+    通常情况下，我们都是'直接使用系统类加载器' (lincq:非自定义)。
+    但是，'有的时候，我们也需要自定义类加载器'。比如应用是'通过网络来传输Java类的字节码，为保证安全性，这些字节码经过了加密处理，这时系统类加载器就无法对其进行加载'，
+    这样则'需要自定义类加载器来实现'。'自定义类加载器'一般都'是继承自ClassLoader类'，从上面对loadClass方法来分析来看，我们'只需要重写findClass方法'即可。
+    下面我们通过一个示例来演示自定义类加载器的流程：
 
-package com.neo.classloader;
-import java.io.*;
+    package com.neo.classloader;
+    import java.io.*;
 
-public class MyClassLoader extends ClassLoader {
-    private String root;
+    public class MyClassLoader extends ClassLoader {
+        
+        private String root;
 
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
-        byte[] classData = loadClassData(name);
-        if (classData == null) {
-            throw new ClassNotFoundException();
-        } else {
-            return defineClass(name, classData, 0, classData.length);
-        }
-    }
-
-    private byte[] loadClassData(String className) {
-        String fileName = root + File.separatorChar
-                + className.replace('.', File.separatorChar) + ".class";
-        try {
-            InputStream ins = new FileInputStream(fileName);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            int bufferSize = 1024;
-            byte[] buffer = new byte[bufferSize];
-            int length = 0;
-            while ((length = ins.read(buffer)) != -1) {
-                baos.write(buffer, 0, length);
+        '重写findClass方法'
+        protected Class<?> findClass(String name) throws ClassNotFoundException {
+            byte[] classData = loadClassData(name);
+            if (classData == null) {
+                throw new ClassNotFoundException();
+            } else {
+                return defineClass(name, classData, 0, classData.length);
             }
-            return baos.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return null;
-    }
 
-    public String getRoot() {
-        return root;
-    }
+        private byte[] loadClassData(String className) {
+            String fileName = root + File.separatorChar
+                    + className.replace('.', File.separatorChar) + ".class";
+            try {
+                InputStream ins = new FileInputStream(fileName);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                int bufferSize = 1024;
+                byte[] buffer = new byte[bufferSize];
+                int length = 0;
+                while ((length = ins.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }
+                return baos.toByteArray();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
 
-    public void setRoot(String root) {
-        this.root = root;
-    }
+        public String getRoot() {
+            return root;
+        }
 
-    public static void main(String[] args)  {
+        public void setRoot(String root) {
+            this.root = root;
+        }
 
-        MyClassLoader classLoader = new MyClassLoader();
-        classLoader.setRoot("E:\\temp");
+        public static void main(String[] args)  {
 
-        Class<?> testClass = null;
-        try {
-            testClass = classLoader.loadClass("com.neo.classloader.Test2");
-            Object object = testClass.newInstance();
-            System.out.println(object.getClass().getClassLoader());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            MyClassLoader classLoader = new MyClassLoader();
+            '注意.注意.注意.' '自定义类加载器，设置的类扫描路径，不能直接放在类路径classpath，会直接导致该类被AppClassLoader加载'
+            classLoader.setRoot("E:\\temp");
+
+            Class<?> testClass = null;
+            try {
+                testClass = classLoader.loadClass("com.neo.classloader.Test2");
+                Object object = testClass.newInstance();
+                System.out.println(object.getClass().getClassLoader());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
     }
-}
-自定义类加载器的核心在于对字节码文件的获取，如果是加密的字节码则需要在该类中对文件进行解密。由于这里只是演示，我并未对class文件进行加密，因此没有解密的过程。这里有几点需要注意：
 
-1、这里传递的文件名需要是类的全限定性名称，即com.paddx.test.classloading.Test格式的，因为 defineClass 方法是按这种格式进行处理的。
-2、最好不要重写loadClass方法，因为这样容易破坏双亲委托模式。
-3、这类Test 类本身可以被 AppClassLoader类加载，因此我们不能把com/paddx/test/classloading/Test.class放在类路径下。否则，由于双亲委托机制的存在，会直接导致该类由AppClassLoader加载，而不会通过我们自定义类加载器来加载。
+    '自定义类加载器的核心'在于'对字节码文件的获取'，'如果是加密的字节码' '则需要在该类中' '对文件进行解密'。
+    '由于这里只是演示'，我并未对class文件进行加密，因此没有解密的过程。这里有几点需要注意：
+
+    1、这里'传递的文件名'需要是'类的全限定性名称'，即'com.paddx.test.classloading.Test'格式，因为 'defineClass方法'是'按这种格式进行处理'的。
+    2、'最好不要重写loadClass方法'，因为这样'容易破坏双亲委托模式'。
+    3、这类'Test类本身可以被AppClassLoader类加载'，因此我们不能把com/paddx/test/classloading/Test.class放在类路径下。
+    否则，'由于双亲委托机制的存在'，会'直接导致该类由AppClassLoader加载'，'而不会通过我们自定义类加载器来加载'。
