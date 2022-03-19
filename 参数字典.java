@@ -20,3 +20,13 @@ NewSize设置新生代最小空间大小。
 设置永久代最大空间大小。
 -Xss
 设置每个线程的堆栈大小。
+
+
+-XX:+HeapDumpOnOutOfMemoryError
+    '参数含义'：'当堆内存空间溢出时' '输出堆的内存快照。'
+    配合参数：-XX:+'HeapDumpOnOutOfMemoryError' -XX:'HeapDumpPath'=/export/home/tomcat/logs/
+    触发条件：java.lang.OutOfMemo-ryError: Java heap space. 也就是说'当发生OutOfMemoryError错误时'，才能触发-XX:HeapDumpOnOutOfMemoryError '输出到' -XX:HeapDumpPath'指定位置'。
+
+-XX:HeapDumpPath
+    参数表示'生成DUMP文件的路径'，'也可以指定文件名称'.
+    例如：-XX:HeapDumpPath=${目录}/java_heapdump.hprof。如果不指定文件名，则默认名字为：java_<pid>_<date>_<time>_heapDump.hprof
