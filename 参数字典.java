@@ -30,3 +30,10 @@ NewSize设置新生代最小空间大小。
 -XX:HeapDumpPath
     参数表示'生成DUMP文件的路径'，'也可以指定文件名称'.
     例如：-XX:HeapDumpPath=${目录}/java_heapdump.hprof。如果不指定文件名，则默认名字为：java_<pid>_<date>_<time>_heapDump.hprof
+
+-verbosegc参数 
+    允许在每次GC过程开始时候生成跟踪。
+    
+
+
+
