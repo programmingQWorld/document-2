@@ -1,0 +1,102 @@
+电商后台之库存系统
+http://www.woshipm.com/pd/5187440.html
+
+【Java并发编程】—–“J.U.C”：LinkedBlockingQueue
+https://www.jianshu.com/p/cc2281b1a6bc
+
+可扩展Web架构与分布式系统 
+https://www.cnblogs.com/likehua/p/3796802.html
+
+
+【原创】这可能是东半球最接地气的短链接系统设计 
+https://www.cnblogs.com/rjzheng/p/11827426.html
+
+
+浅谈微服务雪崩及应对措施
+https://www.sohu.com/a/417051784_505818
+
+
+JavaGC
+https://blog.csdn.net/renfufei/category_5884735.html?spm=1001.2014.3001.5482
+
+
+JVM调优总结 -Xms -Xmx -Xmn -Xss
+https://www.cnblogs.com/likehua/p/3369823.html
+
+[简书]笨比乔治
+https://www.jianshu.com/u/bd316610ac77
+
+
+集群高并发情况下如何保证分布式唯一全局ID生成
+https://mp.weixin.qq.com/s/m9XGbB2U15BDt9rf0_d7lw
+
+Spring Cloud知识点汇总Spring Cloud知识点汇总
+https://www.processon.com/view/5df4c972e4b004cc9a2fb40a?fromnew=1
+
+
+SpringCloud2020 alibaba
+https://www.processon.com/view/61dd19865653bb069f56d2c8?fromnew=1
+
+【高并发】假如你网站一天有千万级访问量高并发，如何破解？
+https://blog.csdn.net/liujainq/article/details/105436400?spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-5.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-5.pc_relevant_default&utm_relevant_index=10
+
+SaaS架构经验总结 
+https://www.cnblogs.com/heiming/p/5990681.html
+
+TPS和QPS 并发量区别；日活 访问量 活跃度
+https://blog.csdn.net/weixin_30650039/article/details/95327200?spm=1001.2101.3001.6650.11&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-11.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-11.pc_relevant_default&utm_relevant_index=16
+
+从0到千万级访问量网站架构演变史
+https://blog.csdn.net/xiaoyuerp/article/details/83053871?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-3.pc_relevant_antiscanv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-3.pc_relevant_antiscanv2&utm_relevant_index=5
+
+订单部分商品退款模型思考
+https://blog.csdn.net/a610786189/article/details/87874263?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-4-87874263.pc_agg_new_rank&utm_term=%E9%80%80%E6%AC%BE%E8%AE%A2%E5%8D%95%E8%AE%BE%E8%AE%A1&spm=1000.2123.3001.4430
+
+架构专家李伟山：电商系统之订单系统
+https://blog.csdn.net/k6T9Q8XKs6iIkZPPIFq/article/details/109088625?spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4.pc_relevant_antiscanv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4.pc_relevant_antiscanv2&utm_relevant_index=9
+
+支付退款流程设计_订单系统：从0到1设计思路
+https://blog.csdn.net/weixin_39531688/article/details/109956785?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-1-109956785.pc_agg_new_rank&utm_term=%E9%80%80%E6%AC%BE%E8%AE%A2%E5%8D%95%E8%AE%BE%E8%AE%A1&spm=1000.2123.3001.4430
+
+面试被问到“零拷贝”！你真的理解吗？
+https://zhuanlan.zhihu.com/p/65037432
+
+Spring Boot中使用@Async的时候，千万别忘了线程池的配置！
+https://zhuanlan.zhihu.com/p/410959470
+
+菜鸟积分系统稳定性建设 - 分库分表&百亿级数据迁移
+https://zhuanlan.zhihu.com/p/410721716
+
+微信公众号：程序之心。
+https://www.zhihu.com/column/ityizhan
+
+腾讯资深架构师干货总结：一文读懂大型分布式系统设计的方方面面
+http://www.52im.net/thread-1811-1-1.html
+
+快速理解高性能HTTP服务端的负载均衡技术原理
+https://zhuanlan.zhihu.com/p/44267640
+
+高性能MySQL【笔记】超详细
+https://www.jianshu.com/p/47664afa249e
+
+大宽宽
+
+学习Java虚拟机笔记
+https://gitee.com/tcl192243051/studyJVM/blob/master/5_%E5%B9%B6%E5%8F%91%E7%AF%87/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8E%E9%94%81%E4%BC%98%E5%8C%96.md
+
+标记-压缩算法
+https://www.jianshu.com/p/698eb5e1ccb9
+
+小林coding
+https://juejin.cn/user/1750078243734029
+
+https://www.throwx.cn/
+
+github项目
+    https://github.com/awsdevops009/openmrs/tree/f7829d717d5a5ebed47b14cf503644ac073252f0/api
+
+processon
+    [关键字] 系统设计,近代史
+
+    微服务与分布式面试大纲持续更新
+    https://www.processon.com/view/5c6f55b6e4b03334b5254dc9?fromnew=1
